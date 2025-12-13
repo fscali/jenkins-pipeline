@@ -1,6 +1,13 @@
 pipeline {
     agent any
 
+    parameters {
+
+        string(name: 'TARGET_ENV', defaultValue: 'dev', description: 'Ambiente di deploy')
+        booleanParam(name: 'RUN_TESTS', defaultValue: true, description: 'Eseguire i test?')
+        choice(name: 'LOG_LEVEL', choices: ['INFO', 'DEBUG', 'WARN'], description: 'Livello di log')
+    }
+
     environment {
         APP_NAME = "demo-jenkins"
     }
@@ -14,14 +21,18 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Stage Build'
+                echo 'Stage Build per ambiente ${params.TARGET_ENV}'
+                echo 'Log level: ${params.LOG_LEVEL}'
                 sh './script.sh'
             }
         }
 
         stage('Test') {
+            when {
+                expression { params.RUN_TESTS }
+            }
             steps {
-                echo 'Qui andranno i test'
+                echo "Esecuzione test..."
             }
         }
 
