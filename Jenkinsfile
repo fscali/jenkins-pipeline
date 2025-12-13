@@ -21,8 +21,8 @@ pipeline {
 
         stage('Build') {
             steps {
-                echo 'Stage Build per ambiente ${params.TARGET_ENV}'
-                echo 'Log level: ${params.LOG_LEVEL}'
+                echo "Stage Build per ambiente ${params.TARGET_ENV}"
+                echo "Log level: ${params.LOG_LEVEL}"
                 sh './script.sh'
             }
         }
