@@ -27,7 +27,9 @@ pipeline {
 
         stage('Package') {
             steps {
-                echo "Package ${APP_NAME}" > package.txt
+                sh '''
+                  echo "Package ${APP_NAME}" > package.txt
+                  '''
 
             }
         }
