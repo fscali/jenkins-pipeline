@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        APP_NAME = "demo-jenkins"
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -20,6 +24,22 @@ pipeline {
                 echo 'Qui andranno i test'
             }
         }
+
+        stage('Package') {
+            steps {
+                echo "Package ${APP_NAME}" > package.txt
+
+            }
+        }
+
+        stage('Archive artifacts') {
+            steps {
+                echo 'Archiving build artifacts...'
+                archiveArtifacts artifacts: 'package.txt', fingerprint: true
+            }
+        }
+
+
     }
 
     post {
