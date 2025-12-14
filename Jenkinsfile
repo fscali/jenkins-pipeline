@@ -29,11 +29,13 @@ pipeline {
                         usernameVariable: 'USER',
                         passwordVariable: 'PASS'
                     )
-                ])
+                ]) {
+                     sh '''
+                      echo "Now I will do something with user $USER and password $PASS
+                     '''
+                }
 
-                sh '''
-                    echo "Now I will do something with user $USER and password $PASS
-                '''
+               
             }
         }
 
