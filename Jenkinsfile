@@ -31,7 +31,7 @@ pipeline {
                     )
                 ]) {
                      sh '''
-                      echo "Now I will do something with user $USER and password $PASS
+                      echo "Now I will do something with user $USER and password $PASS"
                      '''
                 }
 
