@@ -19,7 +19,18 @@ pipeline {
         }
     }
 
+   
+
     stages {
+
+        stage('Step devel') {
+            when {
+                not {
+                    branch 'feat/multibranch-main'
+                }
+            }
+        }
+
         stage('Checkout') {
             steps {
                 checkout scm
@@ -36,7 +47,7 @@ pipeline {
 
         stage('Test') {
             when {
-                expression { params.RUN_TESTS }
+                branch 'feat/multibranch-main'
             }
             steps {
                 echo "Esecuzione test..."
@@ -53,6 +64,9 @@ pipeline {
         }
 
         stage('Archive artifacts') {
+            when {
+                branch 'feat/multibranch-main'
+            }
             steps {
                 echo 'Archiving build artifacts...'
                 archiveArtifacts artifacts: 'package.txt', fingerprint: true
