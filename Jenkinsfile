@@ -24,7 +24,7 @@ pipeline {
                 usernamePassword(
                     credentialsId: 'prova-secret-per-pipeline',
                     usernameVariable: 'USER',
-                    passwordVariable 'PASS'
+                    passwordVariable: 'PASS'
                 )
             ]) {
                 sh '''
