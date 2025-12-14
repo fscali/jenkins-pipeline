@@ -2,34 +2,32 @@ pipeline {
     agent any
 
     parameters {
-
         string(name: 'TARGET_ENV', defaultValue: 'dev', description: 'Ambiente di deploy')
         booleanParam(name: 'RUN_TESTS', defaultValue: true, description: 'Eseguire i test?')
         choice(name: 'LOG_LEVEL', choices: ['INFO', 'DEBUG', 'WARN'], description: 'Livello di log')
     }
 
     environment {
-        APP_NAME = "demo-jenkins"
+        APP_NAME = 'demo-jenkins'
     }
 
-    
-
-   
-
     stages {
-
-      stage('Info') {
-        steps {
-            echo "Branch: ${env.BRANCH_NAME}"
-            echo "Commit: ${env.GIT_COMMIT}"
+        stage('Info') {
+            steps {
+                echo "Branch: ${env.BRANCH_NAME}"
+                echo "Commit: ${env.GIT_COMMIT}"
+            }
         }
-      }
 
         stage('Step devel') {
             when {
                 not {
                     branch 'feat/multibranch-main'
                 }
+            }
+
+            steps {
+                echo "Sono in un branch di sviluppo: ${env.BRANCH_NAME}"
             }
         }
 
@@ -52,7 +50,7 @@ pipeline {
                 branch 'feat/multibranch-main'
             }
             steps {
-                echo "Esecuzione test..."
+                echo 'Esecuzione test...'
             }
         }
 
@@ -61,7 +59,6 @@ pipeline {
                 sh label: 'Prova label step package', script: '''
                   echo "Package ${APP_NAME}" > package.txt
                   '''
-
             }
         }
 
@@ -74,8 +71,6 @@ pipeline {
                 archiveArtifacts artifacts: 'package.txt', fingerprint: true
             }
         }
-
-
     }
 
     post {
