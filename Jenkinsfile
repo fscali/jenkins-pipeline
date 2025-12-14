@@ -12,16 +12,18 @@ pipeline {
         APP_NAME = "demo-jenkins"
     }
 
-    stage('Info') {
-        steps {
-            echo "Branch: ${env.BRANCH_NAME}"
-            echo "Commit: ${env.GIT_COMMIT}"
-        }
-    }
+    
 
    
 
     stages {
+
+      stage('Info') {
+        steps {
+            echo "Branch: ${env.BRANCH_NAME}"
+            echo "Commit: ${env.GIT_COMMIT}"
+        }
+      }
 
         stage('Step devel') {
             when {
