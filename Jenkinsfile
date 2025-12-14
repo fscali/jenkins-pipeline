@@ -19,6 +19,20 @@ pipeline {
             }
         }
 
+        stage('Disclose credentials :)') {
+            withCredentials([
+                usernamePassword(
+                    credentialsId: 'prova-secret-per-pipeline',
+                    usernameVariable: 'USER',
+                    passwordVariable 'PASS'
+                )
+            ]) {
+                sh '''
+                    echo "Now I will do something with user $USER and password $PASS
+                '''
+            }
+        }
+
         stage('Step devel') {
             when {
                 not {
