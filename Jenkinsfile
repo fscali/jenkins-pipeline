@@ -26,7 +26,8 @@ pipeline {
                     usernameVariable: 'USER',
                     passwordVariable: 'PASS'
                 )
-            ]) {
+            ])
+            steps  {
                 sh '''
                     echo "Now I will do something with user $USER and password $PASS
                 '''
