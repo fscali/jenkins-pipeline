@@ -38,7 +38,7 @@ pipeline {
 
         stage('Package') {
             steps {
-                sh '''
+                sh label: 'Prova label step package' script: '''
                   echo "Package ${APP_NAME}" > package.txt
                   '''
 
